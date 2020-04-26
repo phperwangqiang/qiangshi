@@ -1,0 +1,69 @@
+<swiper vertical="true" bindchange="shipingaibian" wx:if="{{spenable == true}}"   style="position: renativle;"  current="{{spindex}}" observer:true>
+  <swiper-item wx:for="{{video}}" wx:key="index">
+    <video   class="video" catchtap='videoTap' loop="{{true}}"   controls="{{false}}" id="{{index}}" object-fit="cover" custom-cache="{{false}}"  src="{{item.videourl}}" >
+    <image cachetap="videobtnTap" id="0" class="playImg" src="../images/bofang.png" wx:if="{{item.zanting}}"></image>
+
+      <view class="userinfo">
+        <button class="userico" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" plain="{{true}}" data-id="{{item}}">
+          <image class="button_image" src="{{baseurl+companynfo.picurl}}"></image>
+        </button>
+      </view>
+      <view class="zan">
+        <button class="zan_button" bindtap="binMakePhoneCall" plain="{{true}}" data-id="{{item.mobile}}">
+          <image class="button_image" src="../images/dianhua.png"></image>
+        </button>
+      </view>
+      <view class="weixin">
+        <button  class="weixin_button" bindtap="weixinbtn" plain="{{true}}" data-id="{{item.wxewm}}">
+          <image class="button_image" src="../images/weixin-copy.png"></image>
+        </button>
+      </view>
+      <view class="fenxiang">
+        <!-- <button class="fenxiang_button" open-type="share"  data-shareInfo="{{shareModel}}" plain="{{true}}"> -->
+        <button class="fenxiang_button" open-type="share" catchtap="shareView" plain="{{true}}" data-id="{{item}}" data-index="{{index}}">
+          <image class="button_image"  src="../images/icon_share.png"></image>
+        </button>
+        <text class="button_right_text" >分享</text>
+      </view>
+      <button class="yinyue" plain="{{true}}"  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" data-id="{{item}}">
+        <image class="button_image" src="../images/icon_disk.png"></image>
+        <image class="yinyue_user yinyue_userzhuan"  data-btnindex="0" bindtap="zantingbtn" src="{{baseurl+companynfo.picurl}}" wx:if="{{!item.zanting}}"></image> 
+        <image class="yinyue_user"  data-btnindex="0" bindtap="zantingbtn" src="{{baseurl+companynfo.picurl}}" wx:if="{{item.zanting}}"></image> 
+      </button>
+      <image class="yinyue_yinfu"  data-btnindex="0" bindtap="zantingbtn" src="../images/yinfu.gif"  wx:if="{{!item.zanting}}"></image>
+      <view class="video_title">
+        <view>{{item.name}}</view>
+        <view>{{item.description}}</view>
+      </view>
+    </video>
+  </swiper-item>
+</swiper>
+<!-- 遮罩层 -->
+<view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<!-- 弹出层 -->
+<!-- 二维码或其他图片 -->
+<view class="modalDlg" wx:if="{{showModal}}">
+    <image src="{{baseurl+wxewm}}" bindlongpress="previewImage"  data-src="{{baseurl+wxewm}}"/>
+    <text class="text">保存二维码扫一扫加好友</text>
+    <view bindtap="ok" class="ok">好的</view>
+</view>
+<view class="modalDlgscop" wx:if="{{showModalscop}}" >
+    <text class="text" style="text-align:center;">您未授权,请确认授权</text>
+    <button type='primary' class='openSetting' open-type="openSetting" bindopensetting='handleSetting' hidden='{{openSettingBtnHidden}}'>去授权</button>
+</view>
+<view class="modalDlgscop" wx:if="{{UserInfobutton}}" >
+    <text class="text" style="text-align:center;">请授权获取微信头像</text>
+    <button class='openSetting' bindgetuserinfo='btn_sub' open-type="getUserInfo" style="background-color:green;color:#fff;">授权微信头像</button>
+</view>
+<view wx:if="{{spenable == false}}">
+<image src="/pages/images/gsjj.jpg" style="width:100%"></image>
+<view class="indexdl">
+点睛是一家专注于互联网开发的高新技术公司。公司拥有一支国内最高端的开发技术团队。
+</view>
+<view class="indexdl">
+以消费者需求为设计出发点，以客户利益至上为目的，一直致力于移动App开发(android,ios,window,)、网站开发、微信开发、美工UI设计、MES、云服务等应用。只做最赏心悦目的产品。
+</view>
+<view class="indexdl" style="margin-bottom:70px;">
+通过多年的努力和积累，点睛已助力各行各业的客户成功进入互联网的大时代。依靠积极的价值观念、先进的技术实力、灵活的合作模式，周到的贴心服务获得了客户和企业的高度赞誉
+</view>
+</view>

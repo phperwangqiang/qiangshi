@@ -1,0 +1,228 @@
+/**index.wxss**/
+page{width:100%; height:100%;}
+swiper{width:100%; height:100%;}
+video{width:100%; height:100%;}
+swiper-item{position: relative;}
+.video-play-btn {
+  position: absolute;
+  width: 100rpx;
+  height: 100rpx;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto
+}
+button{display: block;}
+.zan{position: absolute;z-index: 9999; right:20px; bottom:240px; color:#fff !important;width:35px !important; height:35px; line-height: 35px; text-align: center; border-radius:25px; padding:0px; margin:0px;}
+.zan_button{
+  position: absolute;z-index: 9999;
+  width: 35px ! important;
+  height: 100%;
+  line-height: 100%;
+  padding: 0px;
+}
+.fenxiang{
+  position: absolute;z-index: 9999;
+   right:20px; bottom:138px;
+    color:#fff !important;
+    width:35px !important; 
+    height:35px; padding:0px;
+     margin:0px; 
+     line-height: 35px; 
+     text-align: center;
+      border-radius:25px;
+  }
+  .fenxiang_button{
+    position: absolute;z-index: 9999;
+    width: 35px ! important;
+    height: 100%;
+    line-height: 100%;
+    padding: 0px;
+  }
+  .yinyue{
+    position: absolute;z-index: 9999;
+    right:20px; bottom:66px;
+    color:#fff !important;
+    width:35px !important; 
+    height:35px; padding:0px;
+    margin:0px; 
+    line-height: 35px; 
+    text-align: center;
+    border-radius:25px;
+  }
+  .yinyue_user{
+    position: absolute;z-index: 9999;
+    right: 5px;
+    color: #fff !important;
+    width: 24px !important;
+    height: 24px;
+    padding: 0px;
+    margin: 6px 0 0 0;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 25px;
+
+  }
+  
+button[plain]
+
+{ border:0;
+ width: 80px;
+}
+.userinfo{z-index: 9999; position: absolute; right:20px; bottom:292px; color:#fff !important;width:35px !important; height:35px; padding:0px; margin:0px; line-height: 35px; text-align: center; border-radius:25px;}
+.userico{z-index: 9999; position: absolute; right:1px;  color:#fff !important;width:35px !important; height:35px; padding:0px; margin:0px; line-height: 35px; text-align: center; border-radius:25px;}
+.shop_add{z-index: 9999; position: absolute; right:7px;  color:#fff !important;width:20px !important; height:20px; padding:0px; margin:19px 0 0 0; line-height: 20px; text-align: center; border-radius:25px;}
+
+.weixin{position: absolute; right:20px; bottom:186px; color:#fff !important;width:35px !important; height:35px; padding:0px; margin:0px; line-height: 35px; text-align: center; border-radius:25px;}
+.weixin_button{
+  position: inherit;
+  width: 35px ! important;
+  height: 100%;
+  line-height: 100%;
+  padding: 0px;
+}
+.button_right_text{
+  color: #fff;
+  position: absolute;
+  text-align: center;
+  width: 35px;
+  font-size: 12px;
+  right: 1px;
+  margin-top: 25px;
+
+}
+.button_image{
+  width: 35px ! important;
+  height: 100%;
+}
+.bofang{width:100px; height:100px; position: absolute;top:0px;left:50%;top:50%;margin-left:-50px;margin-top:-50px;display: none;}
+.zanting{width:100px; height:100px; position: absolute;top:0px;left:50%;top:50%;margin-left:-50px;margin-top:-50px;}
+.playImg{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 94rpx;
+  height: 94rpx;
+  z-index: 999;
+}
+/* 遮罩层 */
+.mask{
+  width:100%;
+  height:100%;
+  position:fixed;
+  top:0;
+  left:0;
+  background:#000;
+  z-index:9000;
+  opacity:0.5;
+}
+
+/* 弹出层 */
+.modalDlg{
+  width:70%;
+  position:fixed;
+  top:38%;
+  left:0;
+  right:0;
+  z-index:9999;
+  margin:0 auto;
+  margin-top:-100px;
+  background-color:#fff;
+  border-radius:5px;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+}
+.modalDlgscop
+{
+  width:70%;
+  height: 42%;
+  position:fixed;
+  top:50%;
+  left:0;
+  right:0;
+  z-index:9999;
+  margin:0 auto;
+  margin-top:-100px;
+  background-color:#fff;
+  border-radius:5px;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+
+}
+.modalDlgscop .text{
+  margin: 90px 0 30px 0;
+}
+/* 弹出层里面的图片 */
+.modalDlg image{
+  width:220px;
+  height:220px;
+  margin-top:30px;
+}
+
+/* 弹出层里面的按钮 */
+.ok{
+width:80px;
+height:35px;
+background:#44b549;
+line-height:35px;
+text-align:center;
+color:#fff;
+font-size:15px;
+margin:20px auto;
+border-radius:100px;
+}
+
+/* 弹出层里面的文字 */
+.text{
+text-align:justify;
+font-size:14px;
+color:#666;
+width:180px;
+margin-top:10px;
+}
+/* 底部视屏标题 */
+.video_title{
+  bottom: 58px;
+  position: absolute;
+  color: #fff;
+  margin: 0 0 3% 3%;
+
+}
+.video_title :first-child{
+  margin: 0 0 20px 0;
+  font-size: 14px;
+}
+.video_title :last-child{
+  font-size: 12px;
+}
+/* 图片旋转 */
+
+@keyframes box-ani {
+    from {transform: rotate(0)}
+    to {transform: rotate(360deg)}
+  }
+.yinyue_userzhuan{
+    border-radius:50%;
+    /* margin-left: -30rpx; */
+    animation: box-ani 4s  infinite linear;
+}
+.yinyue_yinfu{
+  position: absolute;
+  z-index: 9999;
+  right: 11px;
+  color: #fff !important;
+  width: 24px !important;
+  height: 24px;
+  padding: 0px;
+  margin: 6px 0 0 0;
+  line-height: 20px;
+  text-align: center;
+  bottom: 91px;
+}
+.indexdl{
+  text-indent:2em;width:90%; margin:10px auto;
+}

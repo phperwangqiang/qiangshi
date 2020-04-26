@@ -1,0 +1,50 @@
+<!--pages/shop/index.wxml-->
+<view class="title">
+  商城
+</view>
+<view class="brand_container">
+<view class="shop" bindtap="ShopList">刷新</view>
+  <view  wx:if="{{goodList.length != 0}}">
+    <scroll-view scroll-y="true" style="height: {{scrollHeight + 'px'}};"  bindscrolltolower="ScrollTolower">
+      <block wx:for="{{goodList}}" wx:key="index">
+          <view class="brand_container_info">
+            <!-- 品牌图片 -->
+            <view class="brand_container_img">
+              <image src="{{baseurl+item.picurl}}" mode="widthFix"/>
+            </view>
+            <!-- 底部文字 -->
+            <view class="brand_container_text">
+              <text wx:if="{{item.name!=null}}">{{item.name}}</text>
+              <text wx:if="{{item.description!=null}}">{{item.description}}</text>
+              <text class="brand_container_price" wx:if="{{item.price!=null}}">￥{{item.price}}</text>
+            </view>
+            <view class="brand_container_buttom">
+              <view>
+                <button class="zixun" bindtap="binMakePhoneCall" data-id="{{item.mobile}}" style="background-color:#f90;border-radius:0px  0px 0px 6px;">
+                  咨询
+                </button>
+              </view>
+              <view>
+                <button class="zixun" bindtap="binMakePhoneCall" data-id="{{item.mobile}}" style="background-color:#f60;border-radius:0px;" >
+                  购买
+                </button>
+              </view>
+              <view>
+                <button class="zixun" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" data-id="{{item}}"  style="background-color:#f30;border-radius:0px;">
+                  点赞
+                </button>
+              </view>
+              <view>
+                <button class="zixun" open-type="share" catchtap="shareView" data-id="{{item}}" style="background-color:#f00;border-radius:0px 0px 6px 0px ;">
+                  分享
+                </button>  
+              </view>
+            </view>
+          </view>
+      </block>
+    </scroll-view>
+  </view>
+  <view class="goods_kong" wx:if="{{goodList.length == 0}}">
+    <text>{{goods_kong}}</text>
+  </view>
+</view>

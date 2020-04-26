@@ -1,0 +1,150 @@
+/* pages/case/index.wxss */
+page {
+    background-color: #333333;
+}
+.title{
+  color: #fff;
+  height: 60px;
+  line-height: 80px;
+  text-align: center;
+  background-color: #333333;
+  bottom: 20px;
+}
+.case{
+  color: #fff;
+  background-color: red;
+  width: 122rpx;
+  height: 50rpx;
+  display: block;
+  border-radius: 15%;
+  text-align: center;
+  font-size: 30rpx;
+  line-height: 50rpx;
+  margin: 2%;
+}
+/* 内层包围 */
+.brand_container {
+    width: 90%;
+    margin: 0 5%;
+    padding-top: 11rpx;
+}
+/* 品牌循环 */
+.brand_container_shop {
+    margin-bottom: 50rpx;
+}
+.brand_container_info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 30rpx;
+    margin-bottom: 32rpx;
+    border-bottom: solid 0.5px #fff;
+
+}
+
+/* 品牌图片 */
+.brand_container .brand_container_img{
+   width: 100%;
+    display:flex;
+    flex-wrap: wrap;
+}
+.image {
+    margin-top:3%;
+    width: 100%;
+    /* height: 290rpx; */
+    border-radius: 12rpx 12rpx 12rpx 12rpx;
+    display: flex;
+}
+.images{
+    width: calc(calc(100% / 3) - 10px);
+    margin:5px;
+    height:50px;
+    box-sizing: border-box;
+    border:1px  solid #000;
+}
+.brand_container_price{
+  color: red;
+  position: absolute;
+  padding: 4% 2% 0 76%;
+}
+/* 品牌文字 */
+.brand_container .brand_container_text {
+    padding: 0 5%;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    /* background-color: rgba(0,0,0,0.5); */
+    /* Background:rgba(0,0,0,0.2) */
+}
+/* 文字介绍 */
+.info {
+    font-size: 28rpx;
+    overflow: hidden;
+    margin-top: 32rpx;
+}
+/* 展示按钮 */
+.show_button{
+  color: red;
+  margin:12rpx 0 12rpx 30rpx;
+  font-size: 30rpx;
+}
+.brand_container_buttom{
+  display: flex;
+  position: inherit;
+  width: 100%;
+  opacity: 0.8;
+  bottom: 110rpx;
+  margin-top: -105rpx;
+}
+.brand_container_buttom .zixun{
+  background-color: red;
+  width: 50% ! important;
+  font-weight: normal;
+  height:110rpx;
+  line-height: 110rpx;
+}
+.brand_container_buttom view{
+  font-size: 28rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 77rpx;
+  color: #fff;
+  text-align: center;
+
+}
+.brand_container_buttom view:nth-of-type(1){
+ border-radius:0px  0px 0px 6px;
+}
+.brand_container_buttom view:nth-of-type(2){
+ border-radius:0px 0px 6px 0px  ;
+}
+.brand_container_buttom button{
+  color: #fff !important;
+  height: 21px;
+  padding: 0px;
+  margin: 0px;
+  line-height: 18px;
+  text-align: center;
+  width: 34px ! important;
+  border-radius:1px 1px 1px 1px;
+  font-size: 43rpx;
+  font-weight: normal;
+}
+.brand_container_buttom button image{
+  width: 40rpx;
+  height: 40rpx;
+}
+/* 为空提示 */
+
+.case_kong {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 280rpx;
+}
+.case_kong text {
+    font-size: 30rpx;
+    color: #fff;
+}

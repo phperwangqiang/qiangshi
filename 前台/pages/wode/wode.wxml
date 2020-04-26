@@ -1,0 +1,100 @@
+<!--pages/wode/wode.wxml-->
+<!-- 登录logo -->
+<view class="titletitle">
+  我的
+</view>
+<view>
+<view  wx:if="{{login}}"   >
+  <view class="login_logo_top">
+  <!-- <view class="title"> -->
+    <!-- <image src="../images/touxiang.jpg" /> -->
+  </view>
+  <!-- 登录输入框 -->
+  <view class="login_form">
+      <view class="login_form_item">
+              <input value="{{ name }}" placeholder="请输入用户名" placeholder-class="place-holder" border="{{ false }}" bindinput="inputName" />
+      </view>
+      <view class="login_form_item">
+              <input value="{{ pwd }}" type="password" placeholder="请输入密码" placeholder-class="place-holder" border="{{ false }}" bindinput="inputPwd" />
+      </view>
+      <!-- 按钮 -->
+      <view class="login_form_btn">
+          <button size="large" round class="login_form_btn_item" bind:tap="login">员工登录</button>
+          <button size="large"  round class="login_form_btn_item" bindgetuserinfo='btn_sub' style="background:#f60;margin-top:20px;" open-type="getUserInfo">游客登录</button>
+      </view>
+  </view>
+</view>
+<!-- 登录后的样式 -->
+<view wx:if="{{islogin}}" class="title">
+  <!-- <view  class="userinfo"> -->
+    <!-- <view >
+      <image src="../images/touxiang.jpg" />
+    </view> -->
+    <!-- <view >{{username}}</view> -->
+  <!-- </view> -->
+  <!-- 登录输入框 -->
+  <view class="user_list">
+    <view class="customer_title">用户列表</view>
+    <view>
+      <view class="customer">
+      <view class="customer_user_title">
+        <view>用户名</view>
+        <view>电话</view>
+        <view>操作</view>
+      </view>
+      <scroll-view scroll-y="true" style="height: {{scrollHeight + 'px'}};" bindscrolltolower="ScrollTolower">
+        <block wx:for="{{phoneList}}" wx:key="index">
+          <view class="customer_info">
+            <view  class="customer_name">
+              <!-- <text class="customer_name">{{item.nickname}}</text> -->
+              {{item.nickname}}
+            </view>
+            <view>
+              <button class="customer_phone" bindtap="binMakePhoneCall" data-id="{{item.phone}}">
+                {{item.phone}}
+              </button>
+            </view>
+            <view>
+              <button class="customer_phone" bindtap="binMakePhoneCall" data-id="{{item.phone}}">
+                拨号
+              </button>
+            </view>
+          </view>
+          </block>
+        </scroll-view>
+        <view style="height:10px;background-color:#333333">
+          <button class="tuichu" bindtap="TuiChu">退出</button>
+        </view>
+      </view>
+    </view>
+    <!-- <view>
+      没有数据
+    </view> -->
+  </view>
+</view>
+<view wx:if="{{ptuserlogin}}" class="ptuserinfo">
+  <image src="{{userinfo.avatarUrl}}"></image>
+  <text>{{userinfo.nickName}}</text>
+  <view style="height:10px;background-color:#333333">
+    <button  class="tuichu" bindtap="TuiChu">退出</button >
+  </view>
+</view> 
+</view>
+<view class="footer">
+      <view>点睛科技版权所有</view>
+      <button class="customer_phone" bindtap="binMakePhoneCall" data-id="18132453262">
+        联系方式:18132453262 
+      </button>
+    </view>
+<!-- 忘记密码 -->
+<!-- <view class="login_forget">
+    <text bind:tap="goRegistered">注册</text>
+    <text bind:tap="goForget">忘记密码</text>
+</view> -->
+<!-- 微信快速授权 -->
+<!-- <view class="login_kuai">
+    <button open-type="getUserInfo" bindgetuserinfo="onLogin">
+        <image src="../images/login_btn.png" />
+        <text>微信登录</text>
+    </button>
+</view> -->

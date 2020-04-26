@@ -1,0 +1,42 @@
+<!--pages/case/index.wxml-->
+<view class="title" >
+  案例
+</view>
+<view class="brand_container">
+  <view class="case" bindtap="CaseList">刷新</view>
+  <view  wx:if="{{casesList.length != 0}}">
+    <scroll-view scroll-y="true" style="height: {{scrollHeight + 'px'}};" bindscrolltolower="ScrollTolower">
+      <block wx:for="{{casesList}}" wx:key="index">
+          <view class="brand_container_info">
+          <!-- 底部文字 -->
+            <view class="brand_container_text">
+              <view class="info" wx:if="{{item.description!=null}}">{{item.description}}</view>
+            </view>
+            <!-- <view class="show_button" bindtap="ShowInfoAll" data-id="{{item.id}}">展示</view> -->
+            <!-- 品牌图片 -->
+            <view class="brand_container_img">
+              <image class="image" src="{{baseurl+item.picurl}}" mode="widthFix"/>
+                  <view class="brand_container_buttom">
+                    <view class="zixun">
+                      <button class="zixun" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" data-id="{{item}}" wx:if="{{hasphone}}">
+                        咨询
+                      </button>
+                      <button class="zixun" bindtap="binMakePhoneCall" data-id="{{item.mobile}}" wx:if="{{!hasphone}}">
+                        咨询
+                      </button>
+                    </view>
+                    <view class="zixun" style="background-color:#f90">
+                      <button class="zixun" open-type="share" catchtap="shareView" data-id="{{item}}" style="background-color:#f90">
+                        分享
+                      </button>  
+                    </view>
+                  </view>
+            </view>      
+          </view>
+      </block>
+    </scroll-view>
+  </view>
+  <view class="case_kong" wx:if="{{casesList.length == 0}}">
+    <text>{{case_kong}}</text>
+  </view>
+</view>

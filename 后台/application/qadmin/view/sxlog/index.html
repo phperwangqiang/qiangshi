@@ -1,0 +1,74 @@
+{include file="layout/header" /}
+
+
+<table class="layui-hide" id="card" lay-filter="card"></table>
+<script type="text/html" id="barDemo">
+
+    {{# if (d.state !=1) {}}
+  <a class="layui-btn layui-btn-xs" lay-event="yclog">异常记录</a>
+{{# }}}
+<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+ <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+ 
+
+</script>
+<script type="text/html" id="statetpl">
+  {{#  if(d.state ==1){ }}
+    <span style="color:#009688">{{d.val}}</span>
+  {{#  } else { }}
+    <span style="color:#f00">{{d.val}}</span>
+  {{#  } }}
+</script>
+<script type="text/html" id="logTpl">
+  {{#  if(d.status ==0){ }}
+    暂未设置姓名
+  {{#  } else { }}
+    {{d.uname}}
+  {{#  } }}
+</script>
+<script type="text/html" id="mobileTpl">
+  {{#  if(d.mobile ==0){ }}
+    暂未设置手机号
+  {{#  } else { }}
+    {{d.mobile}}
+  {{#  } }}
+</script>
+<script type="text/html" id="stunoTpl">
+  {{#  if(!d.stuno){ }}
+    暂未设置学号
+  {{#  } else { }}
+    {{d.stuno}}
+  {{#  } }}
+</script>
+<script type="text/html" id="toolbarDemo">
+ 
+</script>
+<script>
+ layui.use(['layer','form'],function () {
+  layui.form.render('select');
+    });
+layui.use('table', function(){
+  var table = layui.table;
+  
+  table.render({
+    elem: '#card'
+    ,url:'{:url('sxlog/indexajax')}'
+  
+    ,toolbar: '#toolbarDemo'//工具栏的id选择器
+    
+    
+    ,id:'testReload'
+    ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+    ,cols: [[
+      {field:'id',width:100, title: '序号'}
+      ,{field:'vals', title: '日志', sort: true}
+     
+      
+    ]]
+  });
+
+});
+
+</script>
+
+{include file="layout/footer" /} 

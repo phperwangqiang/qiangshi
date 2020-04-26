@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+	<head>
+		<title>编辑商品</title>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<style type="text/css">
+		*{margin:0px; padding:0px;}
+		table{width:100%;}
+		table th{font-weight:100; font-size:1em;}
+		table td,table th{border:1px solid #ccc; line-height: 30px; padding:10px 20px;}
+		</style>
+	</head>
+
+	<body  style="height:100%;">
+		<script src="__STATIC__/plugin/layui/layui.js"></script>
+		<link rel="stylesheet" href="__STATIC__/plugin/layui/css/layui.css">
+		<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+		<script>
+		layui.use('layer', function(){ //独立版的layer无需执行这一句
+		  var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+		});
+		
+		
+  		</script>
+		<script>
+		$(function(){
+			
+			$(".addbtn").click(function(){
+				var name=$(".name").val();
+				var description=$(".description").val();
+				var videourl=$(".videourl").val();
+				var picurl=$(".picurl").val();
+				var mobile=$(".mobile").val();
+				var price=$(".price").val();
+				if(name=="")
+				{
+					layer.alert('请输入商品名称');
+					return false;
+				}
+				else if(description=="")
+				{
+					layer.alert('请输入商品描述');
+					return false;
+				}
+				else if(mobile=="")
+				{
+					layer.alert('请输入手机号');
+					return false;
+				}
+				else if(picurl=="")
+				{
+					layer.alert('请上传封面图片');
+					return false;
+				}
+				else if(price=="")
+				{
+					layer.alert("请输入价格");
+					return false;
+				}
+				else{
+					var senddata=$(".layui-form").serialize();
+					$.ajax({
+						type: "post",
+						dataType: "json",
+						url: "{:url('goods/editajax')}",
+						data: senddata,
+						success: function (data) {
+							console.log(data);
+							data=JSON.parse(data);
+							if(data['code']==200)
+							{
+								layer.alert('修改成功',function(){
+									window.parent.location.reload();
+								});
+							}
+							else{
+								layer.alert(data['msg']);
+								return false;
+							}
+						}
+					})
+				}
+			})	
+		})
+		</script>
+		<form class="layui-form">
+		<table>
+			<tr>
+				<th>请输入商品名称</th>
+				<td>
+					<input type="hidden" name="id" value="{$res.id}">
+					<input type="text" class="layui-input name" style="width:65%;margin-right:5px; display:inline-block;"  name="name" value="{$res.name}">
+				</td>
+			</tr>
+			<tr>
+				<th>请输入商品描述</th>
+				<td>
+					<input type="text" class="layui-input description" style="width:65%;margin-right:5px; display:inline-block;" value="{$res.description}" name="description">
+				</td>
+			</tr>
+			<tr>
+				<th>请输入手机号</th>
+				<td>
+					<input type="text" class="layui-input mobile" style="width:65%;margin-right:5px; display:inline-block;" value="{$res.mobile}" name="mobile">
+				</td>
+			</tr>
+			<tr>
+				<th>请输入商品价格</th>
+				<td>
+					<input type="text" class="layui-input price" style="width:65%;margin-right:5px; display:inline-block;" value="{$res.price}" name="price">
+				</td>
+			</tr>
+			<tr>
+				<th>请上传商品封面</th>
+				<td>
+				<div class="layui-col-sm9">
+                             <div class="layui-upload" style="padding:20px; background: #fff">
+							  <button type="button" class="layui-btn" id="thumbupload">上传图片</button>
+							  <div class="layui-upload-list">
+							    <img class="layui-upload-img" src="{$res.picurl}" id="demo1" style="width:100px;">
+							    <p id="demoText"></p>
+							    <input type="hidden" value="{$res.picurl}" name="picurl" class="picurl">
+							  </div>
+							</div>  
+                        </div>
+                </td>
+			</tr>
+			<tr>
+				<td colspan="2"><button class="layui-btn addbtn" type="button">修改商品</button></td>
+			</tr>
+		</table>
+		</form>
+		<script>
+		layui.use('form',function(){
+			var form=layui.form;
+			form.render();
+		})
+		layui.use('upload', function(){
+					  var $ = layui.jquery
+					  ,upload = layui.upload;
+					  var uploadInst = upload.render({
+					    elem: '#thumbupload'
+					    ,accept:'images'
+					    ,url: "{:url('pic/thumbupload')}"
+					    ,before: function(obj){
+					      //预读本地文件示例，不支持ie8
+					      obj.preview(function(index, file, result){
+					        $('#demo1').attr('src', result); //图片链接（base64）
+					      });
+					    }
+					    ,done: function(res){
+					      //如果上传失败
+					     	$('#pre_img').attr('src',res.msg);
+            				$('input[name="img"]').val(res.msg);
+						    if(res.code == 0){
+						      return layer.msg('上传失败');
+						    }
+						    else{
+						      $(".picurl").val(res.msg);
+						    }
+						    //上传成功
+					    }
+					    ,error: function(){
+					      //演示失败状态，并实现重传
+					      var demoText = $('#demoText');
+					      demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+					      demoText.find('.demo-reload').on('click', function(){
+					        uploadInst.upload();
+					      });
+					    }
+					  });
+					});
+		</script>
+
+	</body>
+</html>

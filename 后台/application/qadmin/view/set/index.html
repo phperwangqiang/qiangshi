@@ -1,0 +1,70 @@
+{include file="layout/header" /}
+  		<style type="text/css">
+		*{margin:0px; padding:0px;}
+		table{width:100%;}
+		table th{font-weight:100; font-size:1em;}
+		table td,table th{border:1px solid #ccc; line-height: 30px; padding:10px 20px;}
+		</style>
+		<script>
+		$(function(){
+			
+			$(".addbtn").click(function(){
+				
+				var passwd=$(".passwd").val();
+				if(passwd=="")
+				{
+					layer.alert('请输入密码');
+					return false;
+				}
+				
+				else{
+					var senddata=$(".layui-form").serialize();
+					$.ajax({
+						type: "post",
+						dataType: "json",
+						url: "{:url('set/indexajax')}",
+						data: senddata,
+						success: function (data) {
+							console.log(data);
+							data=JSON.parse(data);
+							if(data['code']==200)
+							{
+								layer.alert('修改成功',function(){
+									window.parent.location.reload();
+								});
+							}
+							else{
+								layer.alert(data['msg']);
+								return false;
+							}
+						}
+					})
+				}
+			})	
+		})
+		</script>
+		<form class="layui-form" style="margin-top:70px;">
+		<table >
+			<tr>
+				<th>请输入您的密码</th>
+				<td>
+					
+					<input type="password" class="layui-input passwd" style="width:65%;margin-right:5px; display:inline-block;"  name="passwd" value="">
+				</td>
+			</tr>
+			
+			<tr>
+				<td colspan="2"><button class="layui-btn addbtn" type="button">修改密码</button></td>
+			</tr>
+		</table>
+		</form>
+		<script>
+		layui.use('form',function(){
+			var form=layui.form;
+			form.render();
+		})
+		
+		</script>
+
+	</body>
+</html>

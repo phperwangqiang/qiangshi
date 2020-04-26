@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<title>视频获客小工具后台</title>
+	<meta charset="utf-8">
+ 	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" href="__STATIC__/plugin/layui/css/layui.css" type="text/css">
+	<script src="__STATIC__/plugin/layui/layui.all.js"></script>
+	<script src="__STATIC__/js/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="__STATIC__/plugin/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="__STATIC__/plugin/bootstrap/css/bootstrap-theme.css">
+  <script src="__STATIC__/plugin/bootstrap/js/bootstrap.js"></script>
+	
+	<link rel="stylesheet" href="__STATIC__/core/css/base.css" type="text/css">
+</head>
+<body>
+	<nav class="navbar navbar-inverse" id="wq-nav">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">导航栏</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">视频获客工具后台</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      	<li {if condition="$sign eq 'index'"}class="currunt"{/if}><a href="{:url('index/index')}"><i class="glyphicon glyphicon-home" style="margin-right:5px;"></i>首页</a></li>
+        
+        <li {if condition="$sign eq 'shipin'"}class="currunt"{/if}><a href="/qadmin/shipin/index"><i class="glyphicon glyphicon-film" style="margin-right:5px;"></i>视频管理</a></li>
+        
+        <li {if condition="$sign eq 'yuangong'"}class="currunt"{/if}><a href="/qadmin/yuangong/index"><i class="glyphicon glyphicon glyphicon-user" style="margin-right:5px;"></i>员工管理</a></li>
+
+        <li {if condition="$sign eq 'case'"}class="currunt"{/if}><a href="/qadmin/cases/index"><i class="glyphicon glyphicon-briefcase" style="margin-right:5px;"></i>案例管理</a></li>
+        
+        <li {if condition="$sign eq 'goods'"}class="currunt"{/if}><a href="/qadmin/goods/index"><i class="glyphicon glyphicon-apple" style="margin-right:5px;"></i>商品管理</a></li>
+
+        <li {if condition="$sign eq 'info'"}class="currunt"{/if}><a href="/qadmin/info/index"><i class="glyphicon glyphicon-menu-hamburger" style="margin-right:5px;"></i>公司信息管理</a></li>
+
+        <li {if condition="$sign eq 'kehu'"}class="currunt"{/if}><a href="/qadmin/kehu/index"><i class="glyphicon glyphicon glyphicon-user" style="margin-right:5px;"></i>客户管理</a></li>
+         <li {if condition="$sign eq 'kehu1'"}class="currunt"{/if}><a href="/qadmin/kehu/index1"><i class="glyphicon glyphicon glyphicon-user" style="margin-right:5px;"></i>待分配客户</a></li>
+         <li {if condition="$sign eq 'qzkehu'"}class="currunt"{/if}><a href="/qadmin/kehu/qzindex"><i class="glyphicon glyphicon glyphicon-user" style="margin-right:5px;"></i>潜在客户管理</a></li>
+      </ul>
+     
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-cog" style="margin-right:5px;"></i>设置<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="{:url('set/index')}">设置账户</a></li>
+          		 <li role="separator" class="divider"></li>
+					<li><a class="logout">退出登录</a></li>
+          </ul>
+        </li>
+      </ul>
+      <script>
+      $(function(){
+        $(".logout").click(function(){
+          $.ajax({
+              type: "post",
+              dataType: "text",
+              url: "{:url('login/logout')}",
+              data: {1:1},
+              success: function (data) {
+              
+                if(data==0)
+                {
+                  layer.alert('退出成功',function(){
+                    location.reload();
+                  })
+                }
+              }
+            });
+          })
+        })
+      </script>
+    </div>
+  </div>
+</nav>
+<!-- <span class="wq-breadcrumb">
+  <a href="{:url('Index/index')}">首页</a>
+  <if condition="$mianbaoxie[0]['name'] neq ''">
+    <span>></span>
+  <a href=""></a>
+  </if>
+   <if condition="$mianbaoxie[1]['name'] neq ''">
+  <span>></span>
+  <a><cite></cite></a>
+  </if>
+</span> -->

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<title>物联网售水机管理系统</title>
+	<meta charset="utf-8">
+ 	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" href="__STATIC__/plugin/layui/css/layui.css" type="text/css">
+	<script src="__STATIC__/plugin/layui/layui.all.js"></script>
+	<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+
+  <link rel="stylesheet" href="__STATIC__/plugin/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" href="__STATIC__/plugin/bootstrap/css/bootstrap-theme.css">
+  <script src="__STATIC__/plugin/bootstrap/js/bootstrap.js"></script>
+	
+	<link rel="stylesheet" href="__STATIC__/core/css/base.css" type="text/css">
+</head>
+<body>
+	<nav class="navbar navbar-inverse" id="wq-nav">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">导航栏</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">物联网售水机后台管理</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      	<li {if condition="$sign eq 'index'"}class="currunt"{/if}><a href="{:url('index/index')}"><i class="glyphicon glyphicon-home" style="margin-right:5px;"></i>首页</a></li>
+        
+        <li {if condition="$sign eq 'order'"}class="currunt"{/if}><a href="{:url('order/index')}"><i class="glyphicon glyphicon-menu-hamburger" style="margin-right:5px;"></i>订单管理</a></li>
+       <li {if condition="$sign eq 'card'"}class="currunt"{/if}><a href="{:url('card/index')}"><i class="glyphicon glyphicon-credit-card" style="margin-right:5px;"></i>卡片管理</a></li>
+        <li {if condition="$sign eq 'mer'"}class="currunt"{/if}><a href="{:url('mershine/index')}"><i class="glyphicon glyphicon-hdd" style="margin-right:5px;"></i>机器管理</a></li>
+         <li {if condition="$sign eq 'area'"}class="currunt"{/if}><a href="{:url('area/index')}"><i class="glyphicon glyphicon-film" style="margin-right:5px;"></i>小区管理</a></li>
+        <li {if condition="$sign eq 'chongz'"}class="currunt"{/if}><a href="{:url('chongz/index')}"><i class="glyphicon glyphicon-menu-hamburger" style="margin-right:5px;"></i>充值日志</a></li>
+        <li {if condition="$sign eq 'sxlog'"}class="currunt"{/if}><a href="{:url('sxlog/index')}"><i class="glyphicon glyphicon-menu-hamburger" style="margin-right:5px;"></i>上下线日志</a></li>
+        
+      </ul>
+     
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-cog" style="margin-right:5px;"></i>设置<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+           <!--  <li><a href="{:url('index/setlog')}">设置账户</a></li>
+          		 <li role="separator" class="divider"></li> -->
+					<li><a class="logout">退出登录</a></li>
+          </ul>
+        </li>
+      </ul>
+      <script>
+      $(function(){
+        $(".logout").click(function(){
+          $.ajax({
+              type: "post",
+              dataType: "text",
+              url: "{:url('login/logout')}",
+              data: {1:1},
+              success: function (data) {
+              
+                if(data==0)
+                {
+                  layer.alert('退出成功',function(){
+                    location.reload();
+                  })
+                }
+              }
+            });
+          })
+        })
+      </script>
+    </div>
+  </div>
+</nav>
+<!-- <span class="wq-breadcrumb">
+  <a href="{:url('Index/index')}">首页</a>
+  <if condition="$mianbaoxie[0]['name'] neq ''">
+    <span>></span>
+  <a href=""></a>
+  </if>
+   <if condition="$mianbaoxie[1]['name'] neq ''">
+  <span>></span>
+  <a><cite></cite></a>
+  </if>
+</span> -->

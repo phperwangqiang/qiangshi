@@ -1,0 +1,181 @@
+{include file="layout/header" /}
+<div class="demoTable" style="width:95%; margin:0px auto; margin-top:70px;">
+
+</div>
+
+<table class="layui-hide" id="card" lay-filter="card"></table>
+
+
+<script type="text/html" id="toolbarDemo">
+ <button class="layui-btn abcbtn">分配</button>
+</script>
+<script type="text/html" id="picTpl">
+ <img src="{{d.picurl}}" style="height:30px;">
+</script>
+<script type="text/html" id="idTpl">
+  <input type="checkbox" name="item" class="item" value="{{d.id}}">
+</script>
+<script>
+ layui.use(['layer','form'],function () {
+  layui.form.render('select');
+
+    });
+layui.use('table', function(){
+  var table = layui.table;
+  var form=layui.form;
+  
+
+  table.render({
+    elem: '#card'
+    
+    ,url:'{:url('kehu/indexajax1')}'
+    ,page: true
+    ,request: {
+        pageName: 'p' //页码的参数名称，默认：page
+        ,limitName: 'l' //每页数据量的参数名，默认：limit
+    }
+    ,toolbar: '#toolbarDemo'//工具栏的id选择器
+    ,limits: [10,30,40,50,60,100,500,1000]
+    ,limit: 50 //每页默认显示的数量
+    ,height:'full-150'
+    ,id:'testReload'
+    ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+    ,cols: [[
+      {field:'id',title:'选择',templet:'#idTpl',width:80}
+      ,{field:'phone',title:'手机号'}
+      ,{field:'country',title:"国家"}
+      ,{field:'province',title:"省份"}
+      ,{field:'city',title:"城市"}
+      ,{field:'nickname', title: '客户昵称'}
+      ,{field:'createat', title: '注册时间'}
+      ,{field:'picurl', title: '客户头像',templet:'#picTpl'}
+      ,{field:'reson',title:'注册原因',width:400}
+      
+    ]]
+  });
+  
+  table.on('tool(card)', function(obj){
+
+      var data = obj.data;
+
+      var res={id:data['id']};
+      //console.log(obj)
+      if(obj.event === 'edit'){
+        layer.msg('准备修改中');
+        layer.open({
+        type: 2,
+        title: '案例设置',
+        shadeClose: true,
+        shade: 0.8,
+        area:['90%','80%'],
+        content: "{:url('cases/edit')}?id="+data['id'],
+      }); 
+      }else{
+         layer.confirm('确定要删除吗？', function(index){
+          //obj.del();
+          del(data['id']);
+        });
+      }
+    
+    });
+      table.on('toolbar(card)', function(obj){
+        var checkStatus = table.checkStatus(obj.config.id);
+        switch(obj.event){
+            
+            case 'add':
+                layer.open({
+                    type: 2,
+                    title: '添加案例',
+                    skin: 'layui-layer-rim',
+                    area: ['90%', '80%'],
+                    content:"{:url('cases/add')}",
+                });
+                break;
+        };
+    });
+
+
+
+    var $ = layui.$, active = {
+      reload: function(){
+        var demoReload = $('#demoReload');
+        var cardtype=$("#cardtype");
+        
+        //执行重载
+        table.reload('testReload', {
+          page: {
+            curr: 1 //重新从第 1 页开始
+          }
+          ,where: {
+            key: {
+              cardid: demoReload.val(),
+              cardtype:cardtype.val()
+            }
+          }
+        }, 'data');
+      }
+   };
+    $(".layui-table thead tr th:eq(0)").click(function(){
+      console.log($("input[name='item']").attr("checked"));
+      if($("input[name='item']").attr("checked")=='checked')
+      {
+         $("input[name='item']").attr('checked',false);
+        form.render();
+      }
+      else{
+        $("input[name='item']").attr('checked',true);
+        form.render();
+      }
+
+    })
+    $('.demoTable .layui-btn').on('click', function(){
+      var type = $(this).data('type');
+      active[type] ? active[type].call(this) : '';
+    });
+    $(".abcbtn").click(function(){
+      var chk_value =[];//定义一个数组    
+      $('input[name="item"]:checked').each(function(){
+            chk_value.push($(this).val());   
+      });
+      if(chk_value.length==0)
+      {
+        layer.alert('您选择的为空');
+      }
+      else{
+        layer.open({
+        type: 2,
+        title: '设置员工',
+        shadeClose: true,
+        shade: 0.8,
+        area:['90%','80%'],
+        content: "{:url('kehu/setyg')}?data="+chk_value,
+      }); 
+      }
+    })
+
+
+
+});
+function del(id){
+  $.ajax({
+       type: "post",
+       dataType: "json",
+       url: "{:url('cases/del')}",
+       data: {id:id},
+       success: function (data) {
+        data=JSON.parse(data);
+          if(data['code']==200)
+          {
+            layer.alert('删除成功');
+            location.reload();
+          }
+          else{
+            layer.alert('网络故障，删除失败');
+            return false;
+          }
+       }
+  })
+}  
+</script>
+
+{include file="layout/footer" /} 

@@ -1,0 +1,41 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/wode/wode",
+    
+    "pages/shop/index",
+    "pages/case/index",
+    
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "white",
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "height":50,
+    "color": "#666666",
+    "selectedColor": "#f10b2e",
+    "custom": true,
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "首页"
+    }, {
+      "pagePath": "pages/case/index",
+      "text": "案例"
+    }
+    , {
+      "pagePath": "pages/shop/index",
+      "text": "商城"
+    },
+    {
+      "pagePath": "pages/wode/wode",
+      "text": "我的"
+    }]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

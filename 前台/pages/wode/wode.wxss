@@ -1,0 +1,294 @@
+/* pages/wode/wode.wxss */
+page {
+    width: 90%;
+    margin: 0 5%;
+    background-color: #333333;
+}
+/* 登录logo */
+.titletitle{
+  color: #fff;
+  height: 60px;
+  line-height: 80px;
+  text-align: center;
+  background-color: #333333;
+  bottom: 20px;
+}
+.login_logo_top {
+    /* height: 40%; */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 36%;
+}
+
+.login_logo_top image {
+    width: 188rpx;
+    height: 226rpx;
+}
+
+
+/* 登录输入框 */
+
+.login_form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 254px;
+}
+
+.login_form .login_form_item {
+    width: 100%;
+    height: 128rpx;
+    border-bottom: 2rpx solid #E0E0E0;
+    display: flex;
+    align-items: flex-end;
+}
+
+
+/* 按钮部分 */
+
+.login_form .login_form_btn {
+    width: 100%;
+    margin-top: 80rpx;
+}
+
+.login_form .login_form_btn button {
+    width: 100%;
+    background-color: #F92629;
+    color: #fff;
+}
+
+
+/* 忘记密码 */
+
+.login_forget {
+    padding: 0 5%;
+    color: #999999;
+    font-size: 28rpx;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 26rpx;
+}
+/* 输入框颜色 */
+.place-holder {
+  /* font-size: 12px; */
+  color:#fff;
+}
+input{color:#fff;}
+/* 微信快速登录 */
+
+.login_kuai {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 150rpx;
+}
+
+.login_kuai text {
+    font-size: 30rpx;
+}
+
+.login_kuai image {
+    width: 100rpx;
+    height: 100rpx;
+}
+.login_kuai button {
+    width: initial;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: none;
+}
+/* 登录后详情展示页 */
+/* 用户信息 */
+.userinfo{
+  color: #fff;
+  text-align: center;
+  font-size: 30rpx;
+  background-color: #999999;
+  /* border-radius: 5%; */
+}
+.userinfo view:nth-child(1){
+    width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 11rpx;
+  height: 58px;
+  line-height: 58px;
+  font-size: 30px;
+  font-weight: normal;
+}
+.userinfo view:nth-child(1) image {
+    width: 146rpx;
+    height: 163rpx;
+    border-radius: 25px;
+    padding-top:30rpx;
+}
+.userinfo view:nth-child(2){
+   padding-top:20rpx;
+   padding-bottom: 40rpx;
+}
+/* 客户列表 */
+.user_list{
+  margin-top:10rpx;
+  background-color: #333333;
+  border-radius: 2% 2% 2% 2%;
+}
+/* .user_list view:nth-child(1){
+  border-bottom: 1prx solid #E0E0E0;
+  width:90%;
+  height:30rpx;
+  line-height: 30rpx;
+} */
+.customer_title{
+  width:90%;
+  margin:0 5%;
+  height:80rpx;
+  color: #fff;
+  font-size: 30rpx;
+  border-bottom:1px solid #999999;
+  line-height: 80rpx;
+  
+}
+.customer{
+  width:90%;
+  color: #fff;
+  font-size: 30rpx;
+  margin:0 5%;
+  background-color:#333333;
+}
+/* 表头 */
+.customer_user_title{
+  height: 60rpx;
+  display: flex;
+  background-color: #333333;
+  margin: 3px auto;
+  text-align: center;
+  font-size: 30rpx;
+  border-bottom: 1px solid #fff
+}
+.customer_user_title :first-child{
+  border-right: 1px solid #fff;
+}
+.customer_user_title view:nth-child(2){
+  border-right: 1px solid #fff;
+}
+.customer_user_title view:nth-child(1){
+  width: 40%;
+  line-height: 61rpx;
+}
+.customer_user_title view:nth-child(2){
+  width: 37%;
+  line-height: 61rpx;
+}
+.customer_user_title view:nth-child(3){
+  width: 22%;
+  line-height: 61rpx;
+}
+.customer_info{
+  background-color: #333333;
+  display: flex;
+  height: 35px;
+  text-align: center;
+  /* margin-bottom: 3rpx; */
+  /* border-bottom: 1px solid #999999; */
+  /* justify-content: space-between; */
+}
+.customer_info view:nth-child(1){
+  width: 40%;
+}
+.customer_info view:nth-child(2){
+  width: 37%;
+}
+.customer_info view:nth-child(3){
+  width: 22%;
+}
+.customer_info view:nth-child(2) button{
+  /* width: 43%; */
+  width:100%;
+}
+
+.customer_info button{
+  color:#fff;
+  background-color:#333333;
+  font-weight: normal;
+}
+.customer_info view:nth-child(3) button{
+  /* width: 43%; */
+  width:90%;
+  color:#f90;
+  /* background-color:#f90;
+  border-radius: 0px;
+  height: 90%; */
+}
+.footer button{
+  color: #999999;
+  /* font-size: 28rpx; */
+  background-color:#333333;
+  font-size: 11px;
+  font-weight: normal;
+  line-height: 17px;
+}
+.customer_name{
+  width: 42%;
+  height: 35px;
+  line-height: 35px;
+  overflow: hidden;
+  text-overflow:ellipsis;
+}
+.customer_phone{
+  width: 50%;
+  height: 35px;
+  text-align: center;
+  line-height: 35px;
+  padding:0px;
+  color: #999999;
+  font-size: 28rpx;
+}
+/* 最底部文字 */
+.footer{
+  /* color: #fff;
+  text-align: center;
+  font-size: 30rpx;
+  margin-top: 7px;
+  height: 30px; */
+  color: #999999;
+  text-align: center;
+  font-size: 28rpx;
+  width:100%;
+  height: 30px;
+  position: fixed;
+  bottom: 60px;
+  margin:0px; padding:0px;
+  left:0px;
+  /* line-height: 50px; */
+  /* margin:3rpx 0 3rpx 0; */
+}
+/* 普通用户登录 */
+.ptuserinfo{
+  width: 90%;
+  margin:0 5%;
+  text-align: center;
+  color:#fff;
+  display: flex;
+  flex-direction:column; 
+}
+.ptuserinfo image{
+  width:200rpx; height:200rpx; 
+  border-radius:50%;
+  margin:25% auto;
+}
+.ptuserinfo text{
+  margin:0 0  25% 0;
+}
+/* 退出按钮 */
+.tuichu{
+  margin: 20px 0 0 0;
+  background-color: red;
+  color:#fff;
+  width: 100%;
+  /* height:  */
+  /* height */
+}

@@ -1,0 +1,147 @@
+{include file="layout/header" /}
+<div class="demoTable" style="width:95%; margin:0px auto; margin-top:70px;">
+
+</div>
+
+<table class="layui-hide" id="card" lay-filter="card"></table>
+<script type="text/html" id="barDemo">
+<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script type="text/html" id="toolbarDemo">
+ <button class="layui-btn" type="button" lay-event="add">添加商品</button>
+</script>
+<script type="text/html" id="picTpl">
+ <img src="{{d.picurl}}" style="height:30px;">
+</script>
+<script>
+ layui.use(['layer','form'],function () {
+  layui.form.render('select');
+
+    });
+layui.use('table', function(){
+  var table = layui.table;
+  var form=layui.form;
+
+  table.render({
+    elem: '#card'
+    ,url:'{:url('goods/indexajax')}'
+    ,page: true
+    ,request: {
+        pageName: 'p' //页码的参数名称，默认：page
+        ,limitName: 'l' //每页数据量的参数名，默认：limit
+    }
+    ,toolbar: '#toolbarDemo'//工具栏的id选择器
+    ,limits: [10,30,40,50,60,100,500,1000]
+    ,limit: 50 //每页默认显示的数量
+    ,height:'full-150'
+    ,id:'testReload'
+    ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+    ,cols: [[
+    {field:'id',title:'ID'}
+      
+      ,{field:'name', title: '商品名称'}
+      ,{field:'description', title: '商品描述'}
+      ,{field:'price', title: '商品价格'}
+      ,{field:'picurl', title: '商品图片',templet:'#picTpl'}
+      ,{field:'createat',title:'添加时间'}
+      
+      ,{title:'操作', toolbar: '#barDemo',fixed:'right', width:200}
+      
+    ]]
+  });
+  table.on('tool(card)', function(obj){
+
+      var data = obj.data;
+
+      var res={id:data['id']};
+      //console.log(obj)
+      if(obj.event === 'edit'){
+        layer.msg('准备修改中');
+        layer.open({
+        type: 2,
+        title: '商品设置',
+        shadeClose: true,
+        shade: 0.8,
+        area:['90%','80%'],
+        content: "{:url('goods/edit')}?id="+data['id'],
+      }); 
+      }else{
+         layer.confirm('确定要删除吗？', function(index){
+          //obj.del();
+          del(data['id']);
+        });
+      }
+    
+    });
+      table.on('toolbar(card)', function(obj){
+        var checkStatus = table.checkStatus(obj.config.id);
+        switch(obj.event){
+            
+            case 'add':
+                layer.open({
+                    type: 2,
+                    title: '添加商品',
+                    skin: 'layui-layer-rim',
+                    area: ['90%', '80%'],
+                    content:"{:url('goods/add')}",
+                });
+                break;
+        };
+    });
+
+
+
+    var $ = layui.$, active = {
+      reload: function(){
+        var demoReload = $('#demoReload');
+        var cardtype=$("#cardtype");
+        
+        //执行重载
+        table.reload('testReload', {
+          page: {
+            curr: 1 //重新从第 1 页开始
+          }
+          ,where: {
+            key: {
+              cardid: demoReload.val(),
+              cardtype:cardtype.val()
+            }
+          }
+        }, 'data');
+      }
+   };
+  
+    $('.demoTable .layui-btn').on('click', function(){
+      var type = $(this).data('type');
+      active[type] ? active[type].call(this) : '';
+    });
+
+
+
+
+});
+function del(id){
+  $.ajax({
+       type: "post",
+       dataType: "json",
+       url: "{:url('goods/del')}",
+       data: {id:id},
+       success: function (data) {
+        data=JSON.parse(data);
+          if(data['code']==200)
+          {
+            layer.alert('删除成功');
+            location.reload();
+          }
+          else{
+            layer.alert('网络故障，删除失败');
+            return false;
+          }
+       }
+  })
+}  
+</script>
+
+{include file="layout/footer" /} 
