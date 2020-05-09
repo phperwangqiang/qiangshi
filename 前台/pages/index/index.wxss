@@ -186,17 +186,23 @@ margin-top:10px;
 }
 /* 底部视屏标题 */
 .video_title{
-  bottom: 58px;
+  bottom: 48px;
   position: absolute;
   color: #fff;
-  margin: 0 0 3% 3%;
-
+  margin: 0 0 0 3%;
+  /* height: 56px; */
 }
 .video_title :first-child{
   margin: 0 0 20px 0;
-  font-size: 14px;
+  font-size: 15px;
 }
-.video_title :last-child{
+.description{
+  word-break: keep-all;
+word-wrap: break-word;
+white-space: pre-line;
+  display: block;
+  height: 18px;
+  /* white-space: pre-wrap; */
   font-size: 12px;
 }
 /* 图片旋转 */

@@ -82,7 +82,7 @@ page {
   overflow: hidden;
   text-overflow: ellipsis;
   /* margin: 6px 0 6px 0; */
-  width: 25%;
+  width: 100%;
   color: #fff;
   text-align: center;
 }
@@ -97,6 +97,12 @@ page {
   line-height: 45px;
   font-weight: normal;
   /* border-radius:6px 6px 6px 6px; */
+}
+.brand_container_buttom view:nth-of-type(1){
+ border-radius:0px  0px 0px 6px;
+}
+.brand_container_buttom view:nth-of-type(2){
+ border-radius:0px 0px 6px 0px  ;
 }
  .brand_container_buttom .zixun
  { 

@@ -104,7 +104,8 @@ Page({
         uid: wx.getStorageSync("userid"),
         city: userinfos.city,
         province: userinfos.province,
-        country: userinfos.country
+        country: userinfos.country,
+        cid: app.globalData.cid
       }
       api.UpUserInfo(param).then(res => {
         wx.showToast({
@@ -244,6 +245,7 @@ Page({
     let params = {
       username:this.data.name,
       userpwd:this.data.pwd,
+      cid: app.globalData.cid
     }
     var that=this;
     api.EmployeeLogin(params).then(res => {

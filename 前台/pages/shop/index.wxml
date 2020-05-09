@@ -19,7 +19,22 @@
               <text class="brand_container_price" wx:if="{{item.price!=null}}">￥{{item.price}}</text>
             </view>
             <view class="brand_container_buttom">
-              <view>
+              <view class="brand_container_buttom">
+                <view class="zixun">
+                  <button class="zixun" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" data-id="{{item}}" wx:if="{{hasphone}}">
+                    购买
+                  </button>
+                  <button class="zixun" bindtap="binMakePhoneCall" data-id="{{item.mobile}}" wx:if="{{!hasphone}}">
+                    购买
+                  </button>
+                </view>
+                <view class="zixun" style="background-color:#f90">
+                  <button class="zixun" open-type="share" catchtap="shareView" data-id="{{item}}" style="background-color:#f90">
+                    分享
+                  </button>  
+                </view>
+              </view>
+              <!-- <view>
                 <button class="zixun" bindtap="binMakePhoneCall" data-id="{{item.mobile}}" style="background-color:#f90;border-radius:0px  0px 0px 6px;">
                   咨询
                 </button>
@@ -38,7 +53,7 @@
                 <button class="zixun" open-type="share" catchtap="shareView" data-id="{{item}}" style="background-color:#f00;border-radius:0px 0px 6px 0px ;">
                   分享
                 </button>  
-              </view>
+              </view> -->
             </view>
           </view>
       </block>

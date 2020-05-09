@@ -147,7 +147,8 @@ Page({
   loginactin(options){
     //获取视频列表
     let params = {
-      uid: wx.getStorageSync('userid')
+      uid: wx.getStorageSync('userid'),
+      cid: app.globalData.cid
     }
     api.Isenable(params).then(res => {
       if (res.data.msg == 0) {
@@ -370,13 +371,46 @@ Page({
   GetVideoList(){
     console.log(wx.getStorageSync("token"))
     let params = {
-      uid: wx.getStorageSync("userid")
+      uid: wx.getStorageSync("userid"),
+      cid: app.globalData.cid
     }
     api.VideoList(params).then(res => {
-      // console.log(res.data.data);
+      let videolist=res.data.data
+      if (videolist){
+        for(var i=0;i<videolist.length;i++){
+          if (videolist[i].description.length > 18) {
+            let temp = [];
+            let time = 3
+            while (time>0) {
+              if (time != 1) {
+                console.log("fdsa")
+                if (videolist[i].description.length > 18) {
+                  temp.push(videolist[i].description.substr((3-time)*22,22));
+                } else {
+                  break;
+                }
+              } else {
+                if (videolist[i].description.length > 15) {
+                  temp.push(videolist[i].description.substr((3 - time) * 22, 18) + "...");
+                } else {
+                  break;
+                }
+              }
+              time--;
+            }
+            videolist[i].description = temp
+          }else{
+            let temp = videolist[i].description
+            videolist[i].description=[]
+            videolist[i].description[0] = temp
+          }
+          console.log("432")
+        }
+      }
+      console.log(videolist)
       this.setData({
         baseurl: axios.baseUrl,
-        video:res.data.data
+        video: videolist
       })
     }).catch(err => {
       wx.showToast({
@@ -418,7 +452,8 @@ Page({
         uid: wx.getStorageSync("userid"),
         city:userinfos.city,
         province:userinfos.province,
-        country:userinfos.country
+        country:userinfos.country,
+        cid: app.globalData.cid
       }
       api.UpUserInfo(param).then(res => {
         console.log("上传成功");
@@ -448,7 +483,8 @@ Page({
               encryptedData: ency,
               uid: wx.getStorageSync("userid"),
               type: 1,
-              tid: video.id
+              tid: video.id,
+              cid: app.globalData.cid
             }
             api.Upmobile(param).then(res => {
               wx.showToast({
@@ -470,6 +506,7 @@ Page({
   GetCompanyInfo() {
     let params = {
       uid: wx.getStorageSync("userid"),
+      cid: app.globalData.cid
     }
     api.GetCompanyInfo(params).then(res => {
       console.log(res);

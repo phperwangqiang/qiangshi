@@ -33,7 +33,12 @@
       <image class="yinyue_yinfu"  data-btnindex="0" bindtap="zantingbtn" src="../images/yinfu.gif"  wx:if="{{!item.zanting}}"></image>
       <view class="video_title">
         <view>{{item.name}}</view>
-        <view>{{item.description}}</view>
+        <block wx:for="{{item.description}}" wx:key="key">
+          <veiw class="description" >
+            {{item}}
+          </veiw>
+        </block>
+        
       </view>
     </video>
   </swiper-item>

@@ -14,7 +14,8 @@ Page({
     size: 3,
     ishasdata: 1,
     scrollHeight:0,
-    goods_kong:"努力加载中...."
+    goods_kong:"努力加载中....",
+    hasphone: true
   },
 
   /**
@@ -34,7 +35,13 @@ Page({
     //Do some initialize when page load.
     this.computeScrollViewHeight();
     this.ShopList()
+    let hasphone = true
+    let userinfo = wx.getStorageSync('backuserinfo')
+    if (userinfo.phone != "") {
+      hasphone = false
+    } 
     this.setData({
+      hasphone: hasphone,
       baseurl: axios.baseUrl,
     })
   },
@@ -113,7 +120,8 @@ Page({
   //获取商品列表
   ShopList: function () {
     let param={
-      uid: wx.getStorageSync("userid")
+      uid: wx.getStorageSync("userid"),
+      cid: app.globalData.cid
     }
     api.GoodList(param).then(res => {
       if (res.data.data.length == 0) {
@@ -198,9 +206,9 @@ Page({
         let param={
           iv: iv,
           encryptedData:ency,
-          uid: wx.getStorageSync("userid")
+          uid: wx.getStorageSync("userid"),
+          cid: app.globalData.cid
         }
-        console.log(param);
           api.Upmobile(param).then(res => {
             console.log(res);
             wx.showToast({
@@ -229,6 +237,7 @@ Page({
   },
   getPhoneNumber: function (e) {//点击获取手机号码按钮
     var that = this;
+    console.log(e)
     let video = e.target.dataset.id
     if (video) {
       wx.checkSession({
@@ -246,13 +255,23 @@ Page({
               iv: iv,
               encryptedData: ency,
               uid: wx.getStorageSync("userid"),
-              type: 3,
-              tid: video.id
+              type: 2,
+              tid: video.id,
+              cid: app.globalData.cid
             }
             api.Upmobile(param).then(res => {
               wx.showToast({
                 title: '关注成功',
                 icon: ''
+              })
+              let userinfo = wx.getStorageSync('backuserinfo')
+              //不返回电话所以先随意给个值 方便下次验证时有phone让他可以打电话
+              userinfo.phone = "432423";
+              wx.setStorageSync('backuserinfo', userinfo)
+              let hasphone = false
+              that.setData({
+                hasphone: hasphone,
+                baseurl: axios.baseUrl,
               })
             }).catch(err => {
               console.log(err);
@@ -265,5 +284,5 @@ Page({
         }
       });
     }
-  }
+  },
 })

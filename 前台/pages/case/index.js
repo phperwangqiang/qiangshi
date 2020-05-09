@@ -119,7 +119,8 @@ Page({
   //获取品牌列表
   CaseList: function () {
     let param={
-      uid:wx.getStorageSync("userid")
+      uid:wx.getStorageSync("userid"),
+      cid: app.globalData.cid
     }
     api.CasesList(param).then(res => {
       console.log(res)
@@ -197,7 +198,8 @@ Page({
               encryptedData: ency,
               uid: wx.getStorageSync("userid"),
               type: 2,
-              tid: video.id
+              tid: video.id,
+              cid: app.globalData.cid
             }
             api.Upmobile(param).then(res => {
               wx.showToast({

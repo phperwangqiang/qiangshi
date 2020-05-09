@@ -77,6 +77,7 @@ App({
     code:null,
     token:null,
     userid:null,
-    userinfo:null
+    userinfo:null,
+    cid:0,
   }
 })
