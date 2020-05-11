@@ -17,5 +17,7 @@ api.EmployeeLogin = params => axios.axios('employee/login', params, 'POST', 1, t
 //员工账户下的客户手机号
 api.Upmobile = params => axios.axios('home/upmobile', params, 'POST', 1, true);
 api.Isenable=params=>axios.axios('home/enable',params,'POST',1,true);
+//验证是否需要弹出红包
+api.Redbag = params => axios.axios('redbag/index', params, 'POST', 1, true);
 export default api
 

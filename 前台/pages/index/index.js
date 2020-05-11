@@ -29,6 +29,16 @@ Page({
     video:[],
     //公司信息
     companynfo:"",
+    //红包
+    HongBao:true,
+    //红包图片
+    HongBaoImage:"/pages/images/hongbaokai.jpg",
+    //红包类型
+    HongBaoType:true,
+    //红包文字
+    HongBaoInfo:"",
+    //分享视频信息
+    fenxianginfo:"",
   },
     // 外面的弹窗
     weixinbtn:function (e) {
@@ -143,6 +153,8 @@ Page({
         selected: 0
       })
     }
+    let fenxiang= this.data.fenxianginfo;
+    this.IsHongBao(fenxiang, 2)
   },
   loginactin(options){
     //获取视频列表
@@ -160,18 +172,21 @@ Page({
         this.setData({
           spenable: true
         })
-        this.GetVideoList();
+        this.GetVideoList(options);
+        // let videolist=this.data.video
+        // console.log(videolist)
         //获取公司信息
         this.GetCompanyInfo();
         //播放第一个视频
-        if (options && options.index) {
-          this.setData({
-            spindex: options.index
-          })
-          wx.createVideoContext(options.index).play();
-        } else {
-          wx.createVideoContext("0").play();
-        }
+        // if (options && options.index) {
+        //   this.setData({
+        //     spindex: options.index
+        //   })
+        //   wx.createVideoContext(options.index).play();
+        // } else {
+        //   wx.createVideoContext("0").play();
+        // }
+        
       }
 
     }).catch(err => {
@@ -230,20 +245,43 @@ Page({
     var index = String(this.data.spindex);
     wx.createVideoContext(String(index)).pause();
     let video=this.data.video
-    console.log("fdsa")
     video[index].zanting=true
     this.setData({
-      spindex:e.detail['current']
+      spindex:e.detail['current'],
+      HongBao:false
     });
-    console.log("fdsa12")
     var index1 = that.data.spindex;
     // this.videoContext = swan.createVideoContext(String(index1));
     video[index1].zanting = false
     wx.createVideoContext(String(index1)).play();
-
     this.setData({
-      video: video
+      video: video,
     });
+    // 查看是否飘红包
+    this.IsHongBao(video[index1],1)
+  },
+  IsHongBao(video, fromas){
+    if(video!=""){
+      let params = {
+        uid: wx.getStorageSync("userid"),
+        cid: app.globalData.cid,
+        videoid: video.id,
+        fromas: fromas
+      }
+      api.Redbag(params).then(res => {
+        console.log(res)
+        if (res.data.code == 200) {
+          this.setData({
+            hongbao: true
+          })
+        }
+      }).catch(err => {
+        console.log(err);
+      })
+      this.setData({
+        fenxianginfo:""
+      })
+    }
   },
   getUserInfo: function(e) {
     console.log(e)
@@ -368,8 +406,8 @@ Page({
     
   },
   //获取视频列表
-  GetVideoList(){
-    console.log(wx.getStorageSync("token"))
+  GetVideoList(options){
+    // console.log(wx.getStorageSync("token"))
     let params = {
       uid: wx.getStorageSync("userid"),
       cid: app.globalData.cid
@@ -404,10 +442,18 @@ Page({
             videolist[i].description=[]
             videolist[i].description[0] = temp
           }
-          console.log("432")
         }
       }
-      console.log(videolist)
+      if (options && options.index) {
+        this.setData({
+          spindex: options.index
+        })
+        wx.createVideoContext(options.index).play();
+        this.IsHongBao(videolist[index],1)
+      } else {
+        wx.createVideoContext("0").play();
+        this.IsHongBao(videolist[0],1)
+      }
       this.setData({
         baseurl: axios.baseUrl,
         video: videolist
@@ -422,16 +468,20 @@ Page({
   },
   //微信分享
   onShareAppMessage: function (res) {
+    console.log(res)
     let index=0
     if (res.target.dataset.index)
     {
       index = res.target.dataset.index
     }
     let url = this.data.baseurl + res.target.dataset.id.picurl
+    this.setData({
+      fenxianginfo: res.target.dataset.id
+    })
     return {
       title: res.target.dataset.id.name,
       path: 'pages/index/index?index=' + index,
-      imageUrl: url //自定义图片路径，显示图片长宽比是 5:4。
+      imageUrl: url,//自定义图片路径，显示图片长宽比是 5:4。
     }
   },
 //获取用户信息
@@ -509,12 +559,17 @@ Page({
       cid: app.globalData.cid
     }
     api.GetCompanyInfo(params).then(res => {
-      console.log(res);
       this.setData({
         companynfo: res.data.data,
       })
     }).catch(err => {
       console.log(err);
+    })
+  },
+  //红包关闭事件
+  CloseHongBao(){
+    this.setData({
+      HongBao:false
     })
   }
 })

@@ -19,8 +19,8 @@
         </button>
       </view>
       <view class="fenxiang">
-        <!-- <button class="fenxiang_button" open-type="share"  data-shareInfo="{{shareModel}}" plain="{{true}}"> -->
-        <button class="fenxiang_button" open-type="share" catchtap="shareView" plain="{{true}}" data-id="{{item}}" data-index="{{index}}">
+        <!-- <button class="fenxiang_button" open-type="share" catchtap="shareView" data-shareInfo="{{shareModel}}" plain="{{true}}"> -->
+        <button class="fenxiang_button" open-type="share"  plain="{{true}}" data-id="{{item}}" data-index="{{index}}">
           <image class="button_image"  src="../images/icon_share.png"></image>
         </button>
         <text class="button_right_text" >分享</text>
@@ -43,6 +43,13 @@
     </video>
   </swiper-item>
 </swiper>
+
+
+<view class='hongbao animated fadeInUpBig' wx:if="{{HongBao}}">
+  <image class="hongbaoinfo" src="{{HongBaoImage}}"></image>
+  <text class="hongbaoinfotext" wx:if="{{HongBaoType}}">{{HongBaoInfo}}</text>
+  <text class="hbclose" src="/images/close.png" bindtap="CloseHongBao">×</text>
+</view>
 <!-- 遮罩层 -->
 <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
 <!-- 弹出层 -->
